@@ -1,3 +1,4 @@
+  
 /// <reference types="cypress" />
 
 describe('a test scenario', () => {
@@ -14,3 +15,4 @@ describe('a test scenario', () => {
   })
 
 })
+
