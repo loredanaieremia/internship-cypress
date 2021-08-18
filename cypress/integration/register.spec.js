@@ -17,23 +17,9 @@ describe('Check Register functionality', () => {
       cy.get('.control > label').click()
       cy.get('.buttons-set > .button').click()
       cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div > ul > li > ul > li > span').should('have.text','Thank you for registering with Main Website Store.')
-      
-      
-      
-
-  
-    
+         
     })
-  
-  })
-
-  describe('Check Register functionality', () => {
-    beforeEach(() => {
-  
-      cy.visit('http://live.demoguru99.com')
-  
-    })
-  
+   
     it('Check the required fields by not filling any data', () => {
       cy.get('.skip-account').click()
       cy.get(':nth-child(5) > a').click()
@@ -47,43 +33,23 @@ describe('Check Register functionality', () => {
       cy.get('.buttons-set > .button').click()
       cy.get('#form-validate > div.fieldset > p.required').should('have.text','* Required Fields')
   
-    
-    })
-  
-  })
+     })
 
-
-  describe('Check Register functionality', () => {
-    beforeEach(() => {
-  
-      cy.visit('http://live.demoguru99.com')
-  
-    })
-  
-    it('Check all the optional fields when do not fill data', () => {
+    it('Check the password when passing only numbers', () => {
       cy.get('.skip-account').click()
       cy.get(':nth-child(5) > a').click()
       cy.get('#firstname').type('Jake')
       cy.get('#middlename').click()
       cy.get('#lastname').type('Smith')
-      cy.get('#email_address').type('jex.smith@gmail.com')
-      cy.get('#password').type('abcdefgh')
-      cy.get('#confirmation').type('abcdefgh')
+      cy.get('#email_address').type('jeeessx.smith@gmail.com')
+      cy.get('#password').type('12345678')
+      cy.get('#confirmation').type('12345678')
       cy.get('.control > label').click()
       cy.get('.buttons-set > .button').click()
       cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div > ul > li > ul > li > span').should('have.text','Thank you for registering with Main Website Store.') 
     
     })
-  
-  })
-  
-  describe('Check Register functionality', () => {
-    beforeEach(() => {
-  
-      cy.visit('http://live.demoguru99.com')
-  
-    })
-  
+
     it('Check the password limit when enter value less than min', () => {
       cy.get('.skip-account').click()
       cy.get(':nth-child(5) > a').click()
@@ -100,17 +66,7 @@ describe('Check Register functionality', () => {
     
     })
   
-  })
-
-
-describe('Check Register functionality', () => {
-    beforeEach(() => {
-  
-      cy.visit('http://live.demoguru99.com')
-  
-    })
-  
-    it('Check the phone number when passing alphanumeric data', () => {
+    it('Check the password when entering alphanumeric data', () => {
       cy.get('.skip-account').click()
       cy.get(':nth-child(5) > a').click()
       cy.get('#firstname').type('Thomas')
