@@ -1,11 +1,11 @@
-describe('Task 3', () => {
+describe('Check the Update account functionality', () => {
     beforeEach(() => {
   
       cy.visit('http://live.demoguru99.com')
   
     })
   
-    it.only('cypress test for updating account information', () => {
+    it('Check the Update account information by adding new data', () => {
         cy.get('.skip-account').click()
         cy.get('#header-account > .links > ul > .last > a').click()
         cy.get('#email').type('mike.smith@gmail.com')
@@ -21,45 +21,26 @@ describe('Task 3', () => {
         cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div > ul > li > ul > li > span').should('have.text','The account information has been saved.')
 
     })
-    it('Check the Add new address functionality', () => {
+    it('Check the Add new address functionality by adding a new default address', () => {
         cy.get('.skip-account').click()
         cy.get('#header-account > .links > ul > .last > a').click()
         cy.get('#email').type('mike.smith@gmail.com')
         cy.get('#pass').type('12345678')
-        cy.get('#send2').click()
-        cy.get('.current').click()
-        cy.get(':nth-child(4) > .col2-set > .col-1 > .box > .box-title > a')
-        cy.get('#street_1').type('5th avenue,California')
-        cy.get('#city').type('California')
-        cy.get('#region').type('California')
+        cy.get('#send2').should('be.visible').click()
+        cy.get('.block-content > ul > :nth-child(3) > a').should('be.visible').click()
+        cy.get('.page-title > .button').should('be.visible').click()
+        cy.get('#telephone').type('0976543234')
+        cy.get('#street_1').clear().type('5th avenue')
+        cy.get('#city').type('New York')
+        cy.get('#region_id').select('New York')
         cy.get('#zip').type('90012')
         cy.get('#country').select('United States')
-        cy.get('.buttons-set > .button').click()
+        cy.get(':nth-child(5) > label').should('be.visible').click()
+        cy.get(':nth-child(6) > label').should('be.visible').click()
+        cy.get('.buttons-set > .button').should('be.visible').click()
     })
-    it('Check the Add new address functionality', () => {
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > .last > a').click()
-        cy.get('#email').type('mike.smith@gmail.com')
-        cy.get('#pass').type('12345678')
-        cy.get('#send2').should('be.visible')
-        cy.get('#send2').click()
-        cy.get('.block-content > ul > :nth-child(3) > a').should('be.visible')
-        cy.get('.block-content > ul > :nth-child(3) > a').click()
-        cy.get('.page-title > .button').should('be.visible')
-        cy.get('.page-title > .button').click()
-        cy.get('#telephone').type('0987654321')
-        cy.get('#street_1').type('6th Avenue')
-        cy.get('#city').type('California')
-        cy.get('#region_id').select('California')
-        cy.get('#zip').type('90013')
-        cy.get('#country').type('United States')
-        cy.get('.buttons-set > .button').should('be.visible')
-        cy.get('.buttons-set > .button').click()
-        cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > ul > li > ul > li > span').should('have.text','The address has been saved.')
-        
-      
-    })
-    it.only('Check the Wishlist functionality', () => {
+    
+    it('Check the Wishlist functionality by adding 2 items to wishlist, 1 for each category', () => {
         cy.get('.skip-account').click()
         cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
         cy.get('#email').type('mike.smith@gmail.com')
@@ -78,9 +59,26 @@ describe('Task 3', () => {
         cy.get('.skip-account').click()
         cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible')
         cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
-        cy.get('#item_51756 > .wishlist-cell5 > .btn-remove').should('be.visible')
-        cy.get('#item_51756 > .wishlist-cell5 > .btn-remove').click()
+
     })
+    it.only('verify wishlist items', () => {
+
+
+
+    it('Check the update functionality by upfating the quantity for 1 item', () => {
+        cy.get('.skip-account').click()
+        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
+        cy.get('#email').type('mike.smith@gmail.com')
+        cy.get('#pass').type('12345678')
+        cy.get('#send2').should('be.visible').click()
+        cy.get('.skip-account').should('be.visible').click()
+        cy.get('#item_51786 > .wishlist-cell2 > .cart-cell > .add-to-cart-alt > .input-text').clear().type('2')
+        cy.get('.buttons-set > .btn-update').should('be.visible').click()
+      
+
+
+    
+  })
     
 
 })    

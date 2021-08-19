@@ -3,45 +3,24 @@ describe('Task 3', () => {
   
       cy.visit('http://live.demoguru99.com')
   
-    })
+    }) 
+    it('Check the Add new address functionality by adding a new default address', () => {
+      cy.get('.skip-account').click()
+      cy.get('#header-account > .links > ul > .last > a').click()
+      cy.get('#email').type('mike.smith@gmail.com')
+      cy.get('#pass').type('12345678')
+      cy.get('#send2').should('be.visible').click()
+      cy.get('.block-content > ul > :nth-child(3) > a').should('be.visible').click()
+      cy.get('.page-title > .button').should('be.visible').click()
+      cy.get('#telephone').type('0976543234')
+      cy.get('#street_1').clear().type('5th avenue')
+      cy.get("#region_id").select("Maryland").should("have.value", "31")
+      cy.get('#city').type('New York')
+      cy.get('#zip').type('90012')
+      cy.get('#country').select('United States')
+      cy.get(':nth-child(5) > label').should('be.visible').click()
+      cy.get(':nth-child(6) > label').should('be.visible').click()
+      cy.get('.buttons-set > .button').should('be.visible').click()
+  })
   
-    it.only('Check the Purchase functionality', () => {
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
-        cy.get('#email').type('mike.smith@gmail.com')
-        cy.get('#pass').type('12345678')
-        cy.get('#send2').should('be.visible').click()
-        cy.get('.skip-account').should('be.visible').click()
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible')
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
-        cy.get('.nav-1 > .level0').should('be.visible').click()
-        cy.get(':nth-child(1) > .product-info > .actions > .add-to-links > :nth-child(1) > .link-wishlist').should('be.visible').click()
-        cy.get('span > a').should('be.visible').click()
-        cy.get('.nav-1 > .level0').should('be.visible').click()
-        cy.get('#product-collection-image-1').should('be.visible').click()
-        cy.get('.link-wishlist').should('be.visible').click()
-        cy.get('.nav-2 > .level0').should('be.visible').click()
-        cy.get('#product-collection-image-4').should('be.visible').click()
-        cy.get('.link-wishlist').should('be.visible').click()
-        cy.get('.nav-2 > .level0').should('be.visible').click()
-        cy.get('#product-collection-image-5').should('be.visible').click()
-        cy.get('.link-wishlist').should('be.visible').click()
-        cy.get('#item_51783 > .wishlist-cell5 > .btn-remove').should('be.visible').click()
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-       
-      
-    })
 })    
