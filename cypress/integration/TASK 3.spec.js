@@ -31,13 +31,14 @@ describe('Check the Update account functionality', () => {
         cy.get('.page-title > .button').should('be.visible').click()
         cy.get('#telephone').type('0976543234')
         cy.get('#street_1').clear().type('5th avenue')
-        cy.get('#city').type('New York')
-        cy.get('#region_id').select('New York')
-        cy.get('#zip').type('90012')
         cy.get('#country').select('United States')
+        cy.get("#region_id").select("Maryland").should("have.value", "31")
+        cy.get('#city').type('New York')
+        cy.get('#zip').type('90012')
         cy.get(':nth-child(5) > label').should('be.visible').click()
         cy.get(':nth-child(6) > label').should('be.visible').click()
         cy.get('.buttons-set > .button').should('be.visible').click()
+        cy.get('.success-msg > ul > li').should('have.text','The address has been saved.')
     })
     
     it('Check the Wishlist functionality by adding 2 items to wishlist, 1 for each category', () => {
@@ -61,11 +62,69 @@ describe('Check the Update account functionality', () => {
         cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
 
     })
-    it.only('verify wishlist items', () => {
+    it('Remove 1 item', () => {
+        cy.get('.skip-account').click()
+          cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
+          cy.get('#email').type('mike.smith@gmail.com')
+          cy.get('#pass').type('12345678')
+          cy.get('#send2').should('be.visible').click()
+          cy.get('.skip-account').should('be.visible').click()
+          cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible').click()
+          cy.get('#item_51787 > .wishlist-cell5 > .btn-remove').should('be.visible').click()
+          
+    })
+    
+    
+    it('Add at least 4 items to cart', () => {
+            cy.get('.skip-account').click()
+            cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
+            cy.get('#email').type('mike.smith@gmail.com')
+            cy.get('#pass').type('12345678')
+            cy.get('#send2').should('be.visible').click()
+            cy.get('.nav-1 > .level0').should('be.visible').click()
+            cy.get('#product-collection-image-3').should('be.visible').click()
+            cy.get('.add-to-cart-buttons > .button').should('be.visible')
+            cy.get('.nav-2 > .level0').should('be.visible').click()
+            cy.get('#product-collection-image-4').should('be.visible')
+            cy.get('#product-collection-image-4').click()
+            cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
+            cy.get('.nav-2 > .level0').should('be.visible').click()
+            cy.get('#product-collection-image-5').should('be.visible')
+            cy.get('#product-collection-image-5').click()
+            cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
+            cy.get('.nav-1 > .level0').should('be.visible').click()
+            cy.get('#product-collection-image-2').should('be.visible')
+            cy.get('#product-collection-image-2').click()
+            cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
+            cy.get('#empty_cart_button > :nth-child(1) > span').should('be.visible')
+            cy.get('#empty_cart_button > :nth-child(1) > span').click()
+    })
+    it('Remove 1 item from the cart', () => {
+        cy.get('.skip-account').click()
+        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
+        cy.get('#email').type('mike.smith@gmail.com')
+        cy.get('#pass').type('12345678')
+        cy.get('#send2').should('be.visible').click()
+        cy.get('.nav-1 > .level0').should('be.visible').click()
+        cy.get('#product-collection-image-3').should('be.visible').click()
+        cy.get('.add-to-cart-buttons > .button').should('be.visible')
+        cy.get('.nav-2 > .level0').should('be.visible').click()
+        cy.get('#product-collection-image-4').should('be.visible')
+        cy.get('#product-collection-image-4').click()
+        cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
+        cy.get('.nav-2 > .level0').should('be.visible').click()
+        cy.get('#product-collection-image-5').should('be.visible')
+        cy.get('#product-collection-image-5').click()
+        cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
+        cy.get('.nav-1 > .level0').should('be.visible').click()
+        cy.get('#product-collection-image-2').should('be.visible')
+        cy.get('#product-collection-image-2').click()
+        cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
+    })
+       
 
 
-
-    it('Check the update functionality by upfating the quantity for 1 item', () => {
+    it('Check the update functionality by updating the quantity for 1 item', () => {
         cy.get('.skip-account').click()
         cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
         cy.get('#email').type('mike.smith@gmail.com')
@@ -74,11 +133,22 @@ describe('Check the Update account functionality', () => {
         cy.get('.skip-account').should('be.visible').click()
         cy.get('#item_51786 > .wishlist-cell2 > .cart-cell > .add-to-cart-alt > .input-text').clear().type('2')
         cy.get('.buttons-set > .btn-update').should('be.visible').click()
-      
+        cy.get('#empty_cart_button > :nth-child(1) > span').should('be.visible')
+        cy.get('#empty_cart_button > :nth-child(1) > span').click()
+       
+    })
 
+    it('verify the selected address is the default one', () => {
+        cy.get('.skip-account').click()
+        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
+        cy.get('#email').type('mike.smith@gmail.com')
+        cy.get('#pass').type('12345678')
+        cy.get('#send2').should('be.visible').click()
+        cy.get('.block-content > ul > :nth-child(3) > a').should('be.visible').click()
+        cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div.col2-set.addresses-list > div.col-1.addresses-primary > h2').should('have.text','Default Addresses')
+        
+    })
 
-    
-  })
     
 
 })    

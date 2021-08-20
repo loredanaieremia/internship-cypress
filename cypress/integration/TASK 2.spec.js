@@ -47,7 +47,7 @@ describe('Check purchase functionality', () => {
         cy.get('body > div > div > div.main-container.col1-layout > div > div > div.page-title > h1').should('have.text','Your order has been received.')
         cy.get('body > div > div > div.main-container.col1-layout > div > div > p:nth-child(3)').should('exist')
     })
-    it('check the order status', () => {
+    it.only('check the order status', () => {
         cy.get('#search').type('iphone')
         cy.get('.input-box > .button').click()
         cy.get('.product-info > .actions > .button').click()
@@ -69,9 +69,8 @@ describe('Check purchase functionality', () => {
         cy.get('#dt_method_checkmo > label').click()
         cy.get('#payment-buttons-container > .button').click()
         cy.get('#review-buttons-container > .button').click()
-        cy.get('body > div > div > div.main-container.col1-layout > div > div > div.page-title > h1').should('have.text','Your order has been received.')
-        cy.get('document.querySelector("body > div > div > div.main-container.col1-layout > div > div > p:nth-child(3)")').should(setTimeout(function() {}))
-        
+     
+        console.log(   cy.get('.col-main > :nth-child(3)'))
     })
  });
 
