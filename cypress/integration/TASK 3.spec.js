@@ -6,24 +6,24 @@ describe('Check the Update account functionality', () => {
     })
   
     it('Check the Update account information by adding new data', () => {
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > .last > a').click()
+        cy.get('.skip-account').should('be.visible').click()
+        cy.get('#header-account > .links > ul > .last > a').should('be.visible').click()
         cy.get('#email').type('mike.smith@gmail.com')
         cy.get('#pass').type('12345678')
         cy.get('#send2').click()
         cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > .first > a').click()
-        cy.get(':nth-child(3) > .col2-set > .col-1 > .box > .box-title > a').click()
+        cy.get('#header-account > .links > ul > .first > a').should('be.visible').click()
+        cy.get(':nth-child(3) > .col2-set > .col-1 > .box > .box-title > a').should('be.visible').click()
         cy.get('#firstname').clear().type('Mikael')
         cy.get('#middlename').clear().type('Sam')
         cy.get('#current_password').clear().type('12345678')
-        cy.get('.buttons-set > .button').click()
+        cy.get('.buttons-set > .button').should('be.visible').click()
         cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div > ul > li > ul > li > span').should('have.text','The account information has been saved.')
-
     })
+
     it('Check the Add new address functionality by adding a new default address', () => {
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > .last > a').click()
+        cy.get('.skip-account').should('be.visible').click()
+        cy.get('#header-account > .links > ul > .last > a').should('be.visible').click()
         cy.get('#email').type('mike.smith@gmail.com')
         cy.get('#pass').type('12345678')
         cy.get('#send2').should('be.visible').click()
@@ -42,27 +42,30 @@ describe('Check the Update account functionality', () => {
     })
     
     it('Check the Wishlist functionality by adding 2 items to wishlist, 1 for each category', () => {
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
+        cy.get('.skip-account').should('be.visible').click()
+        cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible').click()
         cy.get('#email').type('mike.smith@gmail.com')
         cy.get('#pass').type('12345678')
-        cy.get('#send2').should('be.visible')
-        cy.get('#send2').click()
-        cy.get('.nav-1 > .level0').should('be.visible')
-        cy.get('.nav-1 > .level0').click()
-        cy.get(':nth-child(2) > .product-info > .actions > .add-to-links > :nth-child(1) > .link-wishlist').click()
-        cy.get('.nav-2 > .level0').should('be.visible')
-        cy.get('.nav-2 > .level0').click()
-        cy.get(':nth-child(1) > .product-info > .actions > .add-to-links > :nth-child(1) > .link-wishlist').click()
-        cy.get('.header-minicart > .skip-link').should('be.visible')
-        cy.get('.header-minicart > .skip-link').click()
-        cy.get('.skip-account').should('be.visible')
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible')
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
-
+        cy.get('#send2').should('be.visible').click()
+        cy.get('.nav-1 > .level0').should('be.visible').click()
+        cy.get('#product-collection-image-1').should('be.visible').click()
+        cy.get('#product_addtocart_form > div.add-to-cart-wrapper > div > ul.add-to-links > li:nth-child(1) > a').should('be.visible').click()
+        cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div.my-wishlist > ul > li > ul > li > span').should('have.text','Sony Xperia has been added to your wishlist. Click here to continue shopping.')
+        cy.get('.nav-2 > .level0').should('be.visible').click()
+        cy.get('#product-collection-image-5').should('be.visible').click()
+        cy.get('#product_addtocart_form > div.add-to-cart-wrapper > div > ul.add-to-links > li:nth-child(1) > a').should('be.visible').click()
+        cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div.my-wishlist > ul > li > ul > li > span').should('have.text','Samsung LCD has been added to your wishlist. Click here to continue shopping.')
+    
     })
-    it('Remove 1 item', () => {
+    it('verify wishlist items', () => {
+        cy.get('.skip-account').should('be.visible').click()
+          cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible').click()
+          cy.get('#email').type('mike.smith@gmail.com')
+          cy.get('#pass').type('12345678')
+          cy.get('#send2').should('be.visible').click()
+      })
+
+    it('Remove 1 item from wishlist', () => {
         cy.get('.skip-account').click()
           cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
           cy.get('#email').type('mike.smith@gmail.com')
@@ -70,12 +73,11 @@ describe('Check the Update account functionality', () => {
           cy.get('#send2').should('be.visible').click()
           cy.get('.skip-account').should('be.visible').click()
           cy.get('#header-account > .links > ul > :nth-child(2) > a').should('be.visible').click()
-          cy.get('#item_51787 > .wishlist-cell5 > .btn-remove').should('be.visible').click()
-          
+          cy.get('#item_51889 > td.wishlist-cell5.customer-wishlist-item-remove.last > a').should('be.visible').click()
     })
     
     
-    it('Add at least 4 items to cart', () => {
+    it('Test for purchasing items', () => {
             cy.get('.skip-account').click()
             cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
             cy.get('#email').type('mike.smith@gmail.com')
@@ -99,7 +101,7 @@ describe('Check the Update account functionality', () => {
             cy.get('#empty_cart_button > :nth-child(1) > span').should('be.visible')
             cy.get('#empty_cart_button > :nth-child(1) > span').click()
     })
-    it('Remove 1 item from the cart', () => {
+    it('Remove one item from cart and update the quantity of an item', () => {
         cy.get('.skip-account').click()
         cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
         cy.get('#email').type('mike.smith@gmail.com')
@@ -120,22 +122,16 @@ describe('Check the Update account functionality', () => {
         cy.get('#product-collection-image-2').should('be.visible')
         cy.get('#product-collection-image-2').click()
         cy.get('.add-to-cart-buttons > .button').should('be.visible').click()
-    })
-       
-
-
-    it('Check the update functionality by updating the quantity for 1 item', () => {
-        cy.get('.skip-account').click()
-        cy.get('#header-account > .links > ul > :nth-child(2) > a').click()
-        cy.get('#email').type('mike.smith@gmail.com')
-        cy.get('#pass').type('12345678')
-        cy.get('#send2').should('be.visible').click()
-        cy.get('.skip-account').should('be.visible').click()
-        cy.get('#item_51786 > .wishlist-cell2 > .cart-cell > .add-to-cart-alt > .input-text').clear().type('2')
-        cy.get('.buttons-set > .btn-update').should('be.visible').click()
-        cy.get('#empty_cart_button > :nth-child(1) > span').should('be.visible')
-        cy.get('#empty_cart_button > :nth-child(1) > span').click()
-       
+        cy.get('#shopping-cart-table > tbody > tr.first.odd > td.a-center.product-cart-remove.last > a').should('have.text','Remove Item').click()  
+        cy.get('.first > .product-cart-actions > .input-text').click().clear().type('3')
+        cy.get('#shopping-cart-table > tbody > tr.first.odd > td.product-cart-actions > button').should('be.visible').click()
+        cy.get('.page-title > .checkout-types > li > .button').should('be.visible').click()
+        cy.get('#billing-buttons-container > .button').click()
+        cy.get('#shipping-method-buttons-container > .button').click()
+        cy.get('#p_method_checkmo').check().should('be.checked')
+        cy.get('#payment-buttons-container > .button').click()
+        cy.get('#review-buttons-container > .button').click()
+        
     })
 
     it('verify the selected address is the default one', () => {
@@ -144,9 +140,8 @@ describe('Check the Update account functionality', () => {
         cy.get('#email').type('mike.smith@gmail.com')
         cy.get('#pass').type('12345678')
         cy.get('#send2').should('be.visible').click()
-        cy.get('.block-content > ul > :nth-child(3) > a').should('be.visible').click()
-        cy.get('body > div > div > div.main-container.col2-left-layout > div > div.col-main > div > div.col2-set.addresses-list > div.col-1.addresses-primary > h2').should('have.text','Default Addresses')
-        
+        cy.get('.block-content > ul > :nth-child(4) > a').click()
+        cy.get('[href="http://live.demoguru99.com/index.php/sales/order/view/order_id/15016/"]').click()
     })
 
     
