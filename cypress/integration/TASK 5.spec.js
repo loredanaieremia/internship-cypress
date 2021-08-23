@@ -20,6 +20,32 @@ describe('API requests', () => {
         expect(response.status).to.eq(200)
             
       
-    })
+      })
     })  
+    it('POST API test-Pet object that needs to be added to the store',() => {
+      const item = {
+        "id": 0,
+        "category": {
+          "id": 0,
+          "name": "string"
+        },
+        "name": "doggie",
+        "photoUrls": [
+          "string"
+        ],
+        "tags": [
+          {
+            "id": 0,
+            "name": "string"
+          }
+        ],
+        "status": "available"
+      }
+      cy.request('POST','https://petstore.swagger.io/v2/pet',item).then((response) => {
+        expect(response.status).to.eq(200)
+      })
+
+
+    })
+   
   })   
